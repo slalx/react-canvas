@@ -9,12 +9,12 @@ var articles = require('../common/data');
 
 var Surface = ReactCanvas.Surface;
 var ListView = ReactCanvas.ListView;
-
+     
 var App = React.createClass({
-
+   
   render: function () {
     var size = this.getSize();
-    return (
+    return ( 
       <Surface top={0} left={0} width={size.width} height={size.height}>
         <ListView
           style={this.getListViewStyle()}

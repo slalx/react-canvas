@@ -1,13 +1,18 @@
+
+var webpack = require('webpack');
+
+//提取公共代码的插件
+var commonsPlugin =
+  new webpack.optimize.CommonsChunkPlugin("commons.js");
+
 module.exports = {
   cache: true,
 
   watch: true,
 
   entry: {
-    'listview': ['./examples/listview/app.js'],
-    'timeline': ['./examples/timeline/app.js'],
-    'css-layout': ['./examples/css-layout/app.js'],
-    'hor-list-card': ['./examples/hor-list-card/app.js']
+    'page1': './examples/page1/index.js',
+    'page2': './examples/page2/index.js'
   },
 
   output: {
@@ -17,6 +22,9 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/, loader: 'jsx-loader!transform/cacheable?envify' },
+      { test: /\.html$/, loader: "html-loader" },
+      { test: "\.jpg$", loader: "file-loader" },
+      { test: "\.png$", loader: "url-loader?mimetype=image/png" }
     ],
     postLoaders: [
       { loader: "transform?brfs" }
@@ -28,5 +36,9 @@ module.exports = {
     alias: {
       'react-canvas': 'lib/ReactCanvas.js'
     }
-  }
+  },
+
+  //配置提取公共代码的插件
+  plugins: [commonsPlugin]
+
 };
